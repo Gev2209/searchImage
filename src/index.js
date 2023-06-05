@@ -11,6 +11,9 @@ function handleSearchButtonClick () {
     const inputValue = searchInput.value;
     currentPage = 1;
     fetchImages(currentPage,inputValue)
+    if (searchInput === 0) {
+        console.log('heeyyyyy')
+    }
 };
 showButton.addEventListener('click',handleSearchButtonClick)
 
@@ -25,6 +28,7 @@ function fetchImages (page,query) {
     .then(data => {
         console.log(data);
         renderSearchResult(data.results)
+        
     })
     
 };
@@ -46,9 +50,12 @@ function renderSearchResult (results) {
         createDivEleement.classList.add('result');
 
         resaultData.appendChild(createDivEleement);
+
     });
     forShowMore()                                    
 };
+
+
 
 function forShowMore () {
     showMorebtn.innerHTML = '';
@@ -66,8 +73,10 @@ function forShowMore () {
 
 function handleKeyPress(event) {
     if (event.keyCode === 13) {
+      resaultData.style.display = 'flex'
       handleSearchButtonClick();
     }
+    
 };
 
 document.addEventListener('keydown',handleKeyPress);
